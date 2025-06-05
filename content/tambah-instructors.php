@@ -18,12 +18,21 @@ if (isset($_POST['name'])) {
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $address = $_POST['address'];
+    $password = isset($_POST['password']) ? sha1($_POST['password']) : $rowEdit['password'];
     $id_instructors = isset($_GET['edit']) ? $_GET['edit'] : '';
+
+
     if (!isset($_GET['edit'])) {
-        $insert = mysqli_query($config, "INSERT INTO instructors (name,gender,education,phone,email,address) VALUES('$name','$gender','$education','$phone','$email','$address')");
+        $insert = mysqli_query($config, "INSERT INTO instructors (name,gender,education,phone,email,address,password) VALUES('$name','$gender','$education','$phone','$email','$address','$password')");
         header("location:?page=instructors&tambah=berhasil");
     } else {
-        $update = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', education='$education', phone='$phone', email='$email', address='address'  WHERE id='$id_instructors'");
+        $update = mysqli_query($config, "UPDATE instructors SET name='$name', gender='$gender', 
+        education='$education', 
+        phone='$phone', 
+        email='$email',
+        password='$password',
+        address='address'  
+        WHERE id='$id_instructors'");
         header("location:?page=instructors&ubah=berhasil");
     }
 }
@@ -38,33 +47,41 @@ if (isset($_POST['name'])) {
                 <form action="" method="post">
                     <div class="mb-3">
                         <label for="">FullName *</label>
-                        <input value="<?php echo isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>" type="text" class="form-control" name="name" placeholder="Enter your name" required>                    </div>
+                        <input value="<?php echo isset($rowEdit['name']) ? $rowEdit['name'] : '' ?>" type="text" class="form-control" name="name" placeholder="Enter your name" required>
+                    </div>
                     <div class="mb-3">
                         <label for="">Gender *</label>
                         <input class="form-check-input" type="radio" name="gender" id="men" value="1" <?= isset($_GET['edit']) && $id_instructors['gender'] == '1' ? 'checked' : '' ?>>
                         <label class="form-check-label" for="men">Men</label>
 
-                        <input class="form-check-input" type="radio" name="gender" id="female" value="0" <?= isset($_GET['edit']) && $id_instructors['gender'] == '1' ? 'checked' : '' ?>>
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="0" <?= isset($_GET['edit']) && $id_instructors['gender'] == '0' ? 'checked' : '' ?>>
                         <label class="form-check-label" for="female">Female</label>
                     </div>
                     <div class="mb-3">
                         <label for="">Education *</label>
-                        <input type="text" class="form-control" name="education" placeholder="Enter your education" required>
+                        <input <?php echo isset($rowEdit['education']) ? $rowEdit['education'] : '' ?> type="text" class="form-control" name="education" placeholder="Enter your education" required>
                     </div>
                     <div class="mb-3">
                         <label for="">Phone *</label>
-                        <input type="text" class="form-control" name="phone" placeholder="Enter your phone" required>
+                        <input <?php echo isset($rowEdit['phone']) ? $rowEdit['phone'] : '' ?> type="text" class="form-control" name="phone" placeholder="Enter your phone" required>
                     </div>
                     <div class="mb-3">
                         <label for="">Email *</label>
-                        <input type="email" class="form-control" name="email" placeholder="Enter your email" required>
+                        <input <?php echo isset($rowEdit['email']) ? $rowEdit['email'] : '' ?> type="email" class="form-control" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Password *</label>
+                        <input type="password" class="form-control" name="password" placeholder="Enter your password" <?php echo empty($_GET['edit']) ? 'required' : '' ?>>
+                        <small>
+                            * If you want to change your password, you can fill this field
+                        </small>
                     </div>
                     <div class="mb-3">
                         <label for="">Address *</label>
                         <textarea name="address" class="form-control" cols="30" rows="5"></textarea>
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-success" name="save" value="save">
+                        <input type="submit" class="btn btn-success" name="save" value="Save">
                     </div>
                 </form>
             </div>

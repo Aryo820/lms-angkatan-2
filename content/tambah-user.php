@@ -52,7 +52,7 @@ if (isset($_POST['name'])) {
                         </small>
                     </div>
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-success" name="save" value="save">
+                        <input type="submit" class="btn btn-success" name="save" value="Save">
                     </div>
                 </form>
             </div>

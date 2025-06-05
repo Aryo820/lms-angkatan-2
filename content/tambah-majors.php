@@ -28,14 +28,14 @@ if (isset($_POST['name'])) {
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"><?php echo isset($id_majors) ? 'Edit' : 'Add' ?>Majors</h5>
+                <h5 class="card-title"><?php echo isset($_GET['edit']) ? 'Edit' : 'Add' ?>Majors</h5>
 
                 <form action="" method="post">
                     <div class="mb-3">
                         <label for="">Majors *</label>
                         <input type="text" class="form-control" name="name" placeholder="Enter your majors" required>
                         <div class="mb-3">
-                            <input type="submit" class="btn btn-success" name="save" value="save">
+                            <input type="submit" class="btn btn-success" name="save" value="Save">
                         </div>
                 </form>
             </div>

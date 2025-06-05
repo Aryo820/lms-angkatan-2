@@ -34,9 +34,9 @@ if (isset($_POST['name'])) {
                     <div class="mb-3">
                         <label for="">Roles *</label>
                         <input type="text" class="form-control" name="name" placeholder="Enter your roles" required>
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-success" name="save" value="save">
-                    </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-success" name="save" value="Save">
+                        </div>
                 </form>
             </div>
         </div>
